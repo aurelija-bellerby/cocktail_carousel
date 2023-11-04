@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class Drink {
   final String name;
@@ -78,40 +79,41 @@ class Drink {
   });
 
   factory Drink.fromJson(Map<String, dynamic> json) {
+    var data = json['drinks'][0];
     return Drink(
-        name: json['strDrink'] as String,
-        image: json['strDrinkThumb'] as String,
-        instructions: json['strInstructions'] as String,
-        ingredient1: json['strIngredient1'] as String,
-        ingredient2: json['strIngredient2'],
-        ingredient3: json['strIngredient3'],
-        ingredient4: json['strIngredient4'],
-        ingredient5: json['strIngredient5'],
-        ingredient6: json['strIngredient6'],
-        ingredient7: json['strIngredient7'],
-        ingredient8: json['strIngredient8'],
-        ingredient9: json['strIngredient9'],
-        ingredient10: json['strIngredient10'],
-        ingredient11: json['strIngredient11'],
-        ingredient12: json['strIngredient12'],
-        ingredient13: json['strIngredient13'],
-        ingredient14: json['strIngredient14'],
-        ingredient15: json['strIngredient15'],
-        measure1: json['strMeasure1'] as String,
-        measure2: json['strMeasure2'],
-        measure3: json['strMeasure3'],
-        measure4: json['strMeasure4'],
-        measure5: json['strMeasure5'],
-        measure6: json['strMeasure6'],
-        measure7: json['strMeasure7'],
-        measure8: json['strMeasure8'],
-        measure9: json['strMeasure9'],
-        measure10: json['strMeasure10'],
-        measure11: json['strMeasure11'],
-        measure12: json['strMeasure12'],
-        measure13: json['strMeasure13'],
-        measure14: json['strMeasure14'],
-        measure15: json['strMeasure15']);
+        name: data['strDrink'] as String,
+        image: data['strDrinkThumb'] as String,
+        instructions: data['strInstructions'] as String,
+        ingredient1: data['strIngredient1'] as String,
+        ingredient2: data['strIngredient2'],
+        ingredient3: data['strIngredient3'],
+        ingredient4: data['strIngredient4'],
+        ingredient5: data['strIngredient5'],
+        ingredient6: data['strIngredient6'],
+        ingredient7: data['strIngredient7'],
+        ingredient8: data['strIngredient8'],
+        ingredient9: data['strIngredient9'],
+        ingredient10: data['strIngredient10'],
+        ingredient11: data['strIngredient11'],
+        ingredient12: data['strIngredient12'],
+        ingredient13: data['strIngredient13'],
+        ingredient14: data['strIngredient14'],
+        ingredient15: data['strIngredient15'],
+        measure1: data['strMeasure1'] as String,
+        measure2: data['strMeasure2'],
+        measure3: data['strMeasure3'],
+        measure4: data['strMeasure4'],
+        measure5: data['strMeasure5'],
+        measure6: data['strMeasure6'],
+        measure7: data['strMeasure7'],
+        measure8: data['strMeasure8'],
+        measure9: data['strMeasure9'],
+        measure10: data['strMeasure10'],
+        measure11: data['strMeasure11'],
+        measure12: data['strMeasure12'],
+        measure13: data['strMeasure13'],
+        measure14: data['strMeasure14'],
+        measure15: data['strMeasure15']);
   }
 }
 
@@ -120,7 +122,7 @@ Future<Drink> fetchDrink() async {
   final response = await http
       .get(Uri.parse('https://www.thecocktaildb.com/api/json/v1/1/random.php'));
 
-  // If fetch is successful parse JSON and create dirnk, otherwise throw an exception
+  // If fetch is successful parse JSON and create drink, otherwise throw an exception
   if (response.statusCode == 200) {
     return Drink.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
   } else {
@@ -138,29 +140,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Cocktail Carousel',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(),
+      child: MaterialApp(
+        title: 'Cocktail Carousel',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
+  }
+}
+
+class MyAppState extends ChangeNotifier {
+  Future<Drink>? currentDrink;
+
+  void getDrink() {
+    currentDrink = fetchDrink();
+    notifyListeners();
   }
 }
 
@@ -183,19 +182,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -214,40 +200,39 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
+      body: const Center(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: MainMenu()),
+    );
+  }
+}
+
+class MainMenu extends StatelessWidget {
+  const MainMenu({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+
+    return Column(
+      children: [
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            Text(
+              'Cocktail Carousel',
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'LOGO',
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        ElevatedButton(
+          onPressed: appState.getDrink,
+          child: const Text("I'd like a drink"),
+        ),
+      ],
     );
   }
 }
