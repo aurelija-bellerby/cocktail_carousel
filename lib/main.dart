@@ -157,10 +157,12 @@ class MyApp extends StatelessWidget {
 class MyAppState extends ChangeNotifier {
   Future<Drink>? newDrink;
   Drink? currentDrink;
+  String navLocation = 'Main';
 
-  void getDrink() {
+  void getDrink() async {
     newDrink = fetchDrink();
-    newDrink!.then((value) => currentDrink = value);
+    currentDrink = await newDrink;
+    navLocation = 'Result';
     notifyListeners();
   }
 }
@@ -178,11 +180,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    var nav = appState.navLocation;
+
     Widget view;
-    switch (appState.currentDrink) {
-      case null:
+    switch (nav) {
+      case 'Main':
         view = const MainMenu();
-      case != null:
+      case 'Result':
         view = const SearchResult();
       default:
         throw UnimplementedError('no widget available');
@@ -218,6 +222,7 @@ class MainMenu extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
+            print('getting drink');
             appState.getDrink();
           },
           child: const Text("I'd like a drink"),
@@ -278,8 +283,37 @@ class DrinkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image(image: NetworkImage(drink!.image)),
         Text(drink!.name),
+        Image(image: NetworkImage(drink!.image)),
+      ],
+    );
+  }
+}
+
+class Recipe extends StatelessWidget {
+  const Recipe({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+    var drink = appState.currentDrink;
+
+    return Column(
+      children: [
+        DrinkCard(drink: drink),
+        ElevatedButton.icon(
+          onPressed: () {
+            print('returning to search result');
+          },
+          icon: const Icon(Icons.arrow_back_ios_new),
+          label: const Text('back'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            appState.getDrink();
+          },
+          child: const Text('Next drink'),
+        ),
       ],
     );
   }
