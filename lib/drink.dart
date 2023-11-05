@@ -1,0 +1,112 @@
+class Drink {
+  final String name, image, instructions;
+  // final String image;
+  // final String instructions;
+  final String ingredient1;
+  // Remaining ingredients may be null, therefore String?
+  final String? ingredient2,
+      ingredient3,
+      ingredient4,
+      ingredient5,
+      ingredient6,
+      ingredient7,
+      ingredient8,
+      ingredient9,
+      ingredient10,
+      ingredient11,
+      ingredient12,
+      ingredient13,
+      ingredient14,
+      ingredient15;
+
+  final String measure1;
+  // Remaining measures may be null (same as for ingredients)
+  final String? measure2,
+      measure3,
+      measure4,
+      measure5,
+      measure6,
+      measure7,
+      measure8,
+      measure9,
+      measure10,
+      measure11,
+      measure12,
+      measure13,
+      measure14,
+      measure15;
+
+  const Drink({
+    required this.name,
+    required this.image,
+    required this.instructions,
+    required this.ingredient1,
+    this.ingredient2,
+    this.ingredient3,
+    this.ingredient4,
+    this.ingredient5,
+    this.ingredient6,
+    this.ingredient7,
+    this.ingredient8,
+    this.ingredient9,
+    this.ingredient10,
+    this.ingredient11,
+    this.ingredient12,
+    this.ingredient13,
+    this.ingredient14,
+    this.ingredient15,
+    required this.measure1,
+    this.measure2,
+    this.measure3,
+    this.measure4,
+    this.measure5,
+    this.measure6,
+    this.measure7,
+    this.measure8,
+    this.measure9,
+    this.measure10,
+    this.measure11,
+    this.measure12,
+    this.measure13,
+    this.measure14,
+    this.measure15,
+  });
+
+  factory Drink.fromJson(Map<String, dynamic> json) {
+    var data = json['drinks'][0];
+    return Drink(
+        name: data['strDrink'] as String,
+        image: data['strDrinkThumb'] as String,
+        instructions: data['strInstructions'] as String,
+        ingredient1: data['strIngredient1'] as String,
+        ingredient2: data['strIngredient2'],
+        ingredient3: data['strIngredient3'],
+        ingredient4: data['strIngredient4'],
+        ingredient5: data['strIngredient5'],
+        ingredient6: data['strIngredient6'],
+        ingredient7: data['strIngredient7'],
+        ingredient8: data['strIngredient8'],
+        ingredient9: data['strIngredient9'],
+        ingredient10: data['strIngredient10'],
+        ingredient11: data['strIngredient11'],
+        ingredient12: data['strIngredient12'],
+        ingredient13: data['strIngredient13'],
+        ingredient14: data['strIngredient14'],
+        ingredient15: data['strIngredient15'],
+        measure1: data['strMeasure1'] as String,
+        measure2: data['strMeasure2'],
+        measure3: data['strMeasure3'],
+        measure4: data['strMeasure4'],
+        measure5: data['strMeasure5'],
+        measure6: data['strMeasure6'],
+        measure7: data['strMeasure7'],
+        measure8: data['strMeasure8'],
+        measure9: data['strMeasure9'],
+        measure10: data['strMeasure10'],
+        measure11: data['strMeasure11'],
+        measure12: data['strMeasure12'],
+        measure13: data['strMeasure13'],
+        measure14: data['strMeasure14'],
+        measure15: data['strMeasure15']);
+  }
+}
