@@ -19,9 +19,9 @@ class Drink {
       ingredient14,
       ingredient15;
 
-  final String measure1;
-  // Remaining measures may be null (same as for ingredients)
-  final String? measure2,
+  // All measures may be null
+  final String? measure1,
+      measure2,
       measure3,
       measure4,
       measure5,
@@ -55,7 +55,7 @@ class Drink {
     this.ingredient13,
     this.ingredient14,
     this.ingredient15,
-    required this.measure1,
+    this.measure1,
     this.measure2,
     this.measure3,
     this.measure4,
@@ -93,7 +93,7 @@ class Drink {
         ingredient13: data['strIngredient13'],
         ingredient14: data['strIngredient14'],
         ingredient15: data['strIngredient15'],
-        measure1: data['strMeasure1'] as String,
+        measure1: data['strMeasure1'],
         measure2: data['strMeasure2'],
         measure3: data['strMeasure3'],
         measure4: data['strMeasure4'],
