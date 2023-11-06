@@ -13,11 +13,22 @@ class SearchResult extends StatelessWidget {
 
     return Column(
       children: [
+        const SizedBox(height: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Cocktail \n Carousel',
+            const Column(
+              children: [
+                SizedBox(height: 30),
+                Text(
+                  'Cocktail \n  Carousel',
+                  style: TextStyle(
+                      fontSize: 34,
+                      fontFamily: 'Didot',
+                      fontWeight: FontWeight.w400,
+                      height: 0.7),
+                ),
+              ],
             ),
             Image.asset(
               'assets/images/logo.png',
@@ -25,18 +36,26 @@ class SearchResult extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: 50),
         DrinkCard(drink: drink),
-        ElevatedButton(
-          onPressed: () {
-            appState.navigate('Recipe');
-          },
-          child: const Text('View recipe'),
+        const SizedBox(height: 50),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              appState.navigate('Recipe');
+            },
+            child: const Text('View recipe'),
+          ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            appState.getDrink();
-          },
-          child: const Text('Next drink'),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              appState.getDrink();
+            },
+            child: const Text('Next drink'),
+          ),
         ),
         ElevatedButton(
           onPressed: () {

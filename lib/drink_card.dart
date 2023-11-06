@@ -13,8 +13,17 @@ class DrinkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(drink!.name),
-        Image(image: NetworkImage(drink!.image)),
+        Text(
+          drink!.name,
+          style: const TextStyle(
+            fontFamily: 'Didot',
+            fontSize: 26,
+            decoration: TextDecoration.underline,
+            decorationStyle: TextDecorationStyle.double,
+          ),
+        ),
+        const SizedBox(height: 30),
+        Image(image: NetworkImage(drink!.image), width: 300),
       ],
     );
   }

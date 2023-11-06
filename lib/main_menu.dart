@@ -34,12 +34,20 @@ class MainMenu extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 500),
+        const SizedBox(height: 300),
         ElevatedButton(
           onPressed: () {
             appState.getDrink();
           },
-          child: const Text("I'd like a drink"),
+          style: ElevatedButton.styleFrom(
+              fixedSize: const Size(200, 200), shape: const CircleBorder()),
+          child: const Text(
+            "Tap here for a drink",
+            style: TextStyle(
+              fontSize: 16,
+              height: 1.3,
+            ),
+          ),
         ),
       ],
     );
