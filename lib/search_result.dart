@@ -11,53 +11,57 @@ class SearchResult extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     var drink = appState.currentDrink;
 
-    return Column(
-      children: [
-        const SizedBox(height: 30),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Column(
-              children: [
-                SizedBox(height: 30),
-                Text(
-                  'Cocktail \n  Carousel',
-                  style: TextStyle(
-                      fontSize: 34,
-                      fontFamily: 'Didot',
-                      fontWeight: FontWeight.w400,
-                      height: 0.7),
+    return ListView(
+        padding: const EdgeInsets.only(left: 40, right: 40),
+        children: [
+          Column(
+            children: [
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Column(
+                    children: [
+                      SizedBox(height: 30),
+                      Text(
+                        'Cocktail \n  Carousel',
+                        style: TextStyle(
+                            fontSize: 34,
+                            fontFamily: 'Didot',
+                            fontWeight: FontWeight.w400,
+                            height: 0.7),
+                      ),
+                    ],
+                  ),
+                  Image.asset(
+                    'assets/images/logo.png',
+                    scale: 23,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 80),
+              DrinkCard(drink: drink),
+              const SizedBox(height: 80),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    appState.navigate('Recipe');
+                  },
+                  child: const Text('view recipe'),
                 ),
-              ],
-            ),
-            Image.asset(
-              'assets/images/logo.png',
-              scale: 23,
-            ),
-          ],
-        ),
-        const SizedBox(height: 80),
-        DrinkCard(drink: drink),
-        const SizedBox(height: 80),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              appState.navigate('Recipe');
-            },
-            child: const Text('view recipe'),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    appState.getDrink();
+                  },
+                  child: const Text('next drink'),
+                ),
+              ),
+            ],
           ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              appState.getDrink();
-            },
-            child: const Text('next drink'),
-          ),
-        ),
-      ],
-    );
+        ]);
   }
 }
