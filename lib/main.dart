@@ -37,10 +37,11 @@ class MyApp extends StatelessWidget {
       create: (context) => MyAppState(),
       child: MaterialApp(
         title: 'Cocktail Carousel',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'RaleWay',
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromRGBO(246, 172, 151, 1.0)),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+          // seedColor: const Color.fromRGBO(246, 172, 151, 1.0)),
           useMaterial3: true,
         ),
         home: const MyHomePage(title: 'Cocktail Carousel'),

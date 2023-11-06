@@ -13,13 +13,16 @@ class DrinkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          drink!.name,
-          style: const TextStyle(
-            fontSize: 22,
-            fontFamily: 'Didot',
-            decoration: TextDecoration.underline,
-            decorationStyle: TextDecorationStyle.double,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            drink!.name,
+            style: const TextStyle(
+              fontSize: 22,
+              fontFamily: 'Didot',
+              decoration: TextDecoration.underline,
+              decorationStyle: TextDecorationStyle.double,
+            ),
           ),
         ),
         const SizedBox(height: 30),

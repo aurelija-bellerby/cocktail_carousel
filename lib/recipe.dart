@@ -73,7 +73,7 @@ class Recipe extends StatelessWidget {
               decoration: TextDecoration.underline),
         ),
         const SizedBox(height: 15),
-        Text(drink.instructions),
+        Text(drink.instructions, textAlign: TextAlign.justify),
         const SizedBox(height: 50),
         ElevatedButton.icon(
           onPressed: () {
