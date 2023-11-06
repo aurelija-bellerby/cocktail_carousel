@@ -10,6 +10,7 @@ class Recipe extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     var drink = appState.currentDrink;
+
     Map<String?, String?> contents = {
       drink!.ingredient1: drink.measure1,
       drink.ingredient2: drink.measure2,
@@ -45,8 +46,6 @@ class Recipe extends StatelessWidget {
     }
 
     return ListView(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
       children: [
         DrinkCard(drink: drink),
         const Text('Ingredients'),
@@ -57,7 +56,6 @@ class Recipe extends StatelessWidget {
         Text(drink.instructions),
         ElevatedButton.icon(
           onPressed: () {
-            print(contents);
             appState.navigate('Result');
           },
           icon: const Icon(Icons.arrow_back_ios_new),

@@ -11,17 +11,30 @@ class MainMenu extends StatelessWidget {
 
     return Column(
       children: [
-        const Row(
+        const SizedBox(height: 30),
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Cocktail Carousel',
+            const Column(
+              children: [
+                SizedBox(height: 30),
+                Text(
+                  'Cocktail \n  Carousel',
+                  style: TextStyle(
+                      fontSize: 34,
+                      fontFamily: 'Didot',
+                      fontWeight: FontWeight.w400,
+                      height: 0.7),
+                ),
+              ],
             ),
-            Text(
-              'LOGO',
+            Image.asset(
+              'assets/images/logo.png',
+              scale: 23,
             ),
           ],
         ),
+        const SizedBox(height: 500),
         ElevatedButton(
           onPressed: () {
             appState.getDrink();

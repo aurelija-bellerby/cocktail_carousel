@@ -38,7 +38,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Cocktail Carousel',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          fontFamily: 'RaleWay',
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromRGBO(246, 172, 151, 1.0)),
           useMaterial3: true,
         ),
         home: const MyHomePage(title: 'Cocktail Carousel'),
@@ -79,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     var nav = appState.navLocation;
+    final theme = Theme.of(context);
 
     Widget view;
     switch (nav) {
@@ -92,10 +95,13 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget available');
     }
     return Scaffold(
-      body: Center(
-          child: Container(
-        child: view,
-      )),
+      backgroundColor: theme.colorScheme.surfaceVariant,
+      body: SafeArea(
+        child: Center(
+            child: Container(
+          child: view,
+        )),
+      ),
     );
   }
 }

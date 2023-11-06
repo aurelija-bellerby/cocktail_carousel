@@ -13,14 +13,15 @@ class SearchResult extends StatelessWidget {
 
     return Column(
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Cocktail Carousel',
+            const Text(
+              'Cocktail \n Carousel',
             ),
-            Text(
-              'LOGO',
+            Image.asset(
+              'assets/images/logo.png',
+              scale: 23,
             ),
           ],
         ),
@@ -36,6 +37,12 @@ class SearchResult extends StatelessWidget {
             appState.getDrink();
           },
           child: const Text('Next drink'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            appState.navigate('Main');
+          },
+          child: const Text('Home'),
         ),
       ],
     );
