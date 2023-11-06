@@ -42,7 +42,7 @@ class MainMenu extends StatelessWidget {
           style: ElevatedButton.styleFrom(
               fixedSize: const Size(200, 200), shape: const CircleBorder()),
           child: const Text(
-            "Tap here for a drink",
+            "tap here for a drink",
             style: TextStyle(
               fontSize: 16,
               height: 1.3,

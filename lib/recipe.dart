@@ -43,17 +43,38 @@ class Recipe extends StatelessWidget {
         // Adding only the ingredient if there is no measure
         children.add(Text('${contents.keys.elementAt(i)}'));
       }
+      children.add(const SizedBox(height: 10));
     }
 
     return ListView(
+      padding: const EdgeInsets.only(left: 40, right: 40),
       children: [
+        const SizedBox(height: 50),
         DrinkCard(drink: drink),
-        const Text('Ingredients'),
+        const SizedBox(height: 40),
+        const Text(
+          'Ingredients',
+          style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'Didot',
+              decoration: TextDecoration.underline),
+        ),
+        const SizedBox(height: 15),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: children,
         ),
-        const Text('Instructions'),
+        const SizedBox(height: 20),
+        const Text(
+          'Instructions',
+          style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'Didot',
+              decoration: TextDecoration.underline),
+        ),
+        const SizedBox(height: 15),
         Text(drink.instructions),
+        const SizedBox(height: 50),
         ElevatedButton.icon(
           onPressed: () {
             appState.navigate('Result');

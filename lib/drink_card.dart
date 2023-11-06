@@ -16,14 +16,14 @@ class DrinkCard extends StatelessWidget {
         Text(
           drink!.name,
           style: const TextStyle(
+            fontSize: 22,
             fontFamily: 'Didot',
-            fontSize: 26,
             decoration: TextDecoration.underline,
             decorationStyle: TextDecorationStyle.double,
           ),
         ),
         const SizedBox(height: 30),
-        Image(image: NetworkImage(drink!.image), width: 300),
+        Image(image: NetworkImage(drink!.image), width: 230),
       ],
     );
   }

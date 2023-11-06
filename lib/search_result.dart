@@ -36,16 +36,16 @@ class SearchResult extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 80),
         DrinkCard(drink: drink),
-        const SizedBox(height: 50),
+        const SizedBox(height: 80),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
               appState.navigate('Recipe');
             },
-            child: const Text('View recipe'),
+            child: const Text('view recipe'),
           ),
         ),
         SizedBox(
@@ -54,14 +54,8 @@ class SearchResult extends StatelessWidget {
             onPressed: () {
               appState.getDrink();
             },
-            child: const Text('Next drink'),
+            child: const Text('next drink'),
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            appState.navigate('Main');
-          },
-          child: const Text('Home'),
         ),
       ],
     );
